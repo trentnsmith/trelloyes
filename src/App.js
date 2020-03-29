@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import List from './List';
 import './App.css';
 
-
 class App extends Component {
   static defaultProps = {
     store: {
@@ -10,6 +9,14 @@ class App extends Component {
       allCards: {},
     }
   };
+
+  handleDeleteItem () {
+    console.log('handle delete item called')
+  }
+  
+  handleAddRandom () {
+    console.log('handle add random called')
+  }
 
   render () {
     const {store} = this.props
@@ -21,6 +28,8 @@ class App extends Component {
         <div className='App-list'>
           {store.lists.map(list => (
             <List
+              onDeleteItem={this.handleDeleteItem}
+              onAddRandom={this.handleAddRandom}
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => store.allCards[id])}
