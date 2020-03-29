@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import List from './List';
+import STORE from './store';
 import './App.css';
 
-class App extends Component {
-  static defaultProps = {
-    store: {
-      lists: [],
-      allCards: {},
-    }
-  };
 
-  handleDeleteItem () {
+
+class App extends Component {
+  state = {
+    store: STORE,
+  }
+
+  handleDeleteItem = (cardId) => {
     console.log('handle delete item called')
+    const { lists, allCards } = this.state.store;
+
   }
   
   handleAddRandom () {
