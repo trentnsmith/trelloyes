@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render () {
-    const {store} = this.props
+    const {store} = this.state
     return (
       <main className='App'>
         <header className='App-header'>
