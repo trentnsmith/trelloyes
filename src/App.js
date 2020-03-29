@@ -3,7 +3,15 @@ import List from './List';
 import STORE from './store';
 import './App.css';
 
-
+const newRandomCard = () => {
+  const id = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+  return {
+    id,
+    title: `Random Card ${id}`,
+    content: 'lorem ipsum',
+  }
+}
 
 class App extends Component {
   state = {
