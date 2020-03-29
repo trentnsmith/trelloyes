@@ -40,6 +40,7 @@ class App extends Component {
             <List
               onDeleteItem={this.handleDeleteItem}
               onAddRandom={this.handleAddRandom}
+              id={list.id}
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => store.allCards[id])}

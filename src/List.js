@@ -11,6 +11,7 @@ function List (props) {
             <div className='List-cards'>
                 {props.cards.map((card) =>
                     <Card
+                        id={card.id}
                         onDeleteItem={props.onDeleteItem}
                         key={card.id}
                         title={card.title}
