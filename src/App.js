@@ -3,29 +3,47 @@ import List from './List';
 import STORE from './store';
 import './App.css';
 
-const newRandomCard = () => {
-  const id = Math.random().toString(36).substring(2, 4)
-    + Math.random().toString(36).substring(2, 4);
-  return {
-    id,
-    title: `Random Card ${id}`,
-    content: 'lorem ipsum',
-  }
-}
+
 
 class App extends Component {
   state = {
     store: STORE,
   }
 
-  handleDeleteItem = (cardId) => {
-    console.log('handle delete item called')
-    const { lists, allCards } = this.state.store;
-
+  handleDeleteItem = (cardId, listId) => {
+    console.log('handle delete item called', cardId, listId)
+    let cloneStore = JSON.parse(JSON.stringify(this.state.store))
+    cloneStore.lists.forEach((list) => {
+      if (list.id == listId) {
+        list.cardIds = list.cardIds.filter((id) => {
+          return id != cardId
+        })
+      }
+    })
+    this.setState({ store: cloneStore })
   }
   
-  handleAddRandom () {
+  newRandomCard = () => {
+    const id = Math.random().toString(36).substring(2, 4)
+      + Math.random().toString(36).substring(2, 4);
+    return {
+      id,
+      title: `Random Card ${id}`,
+      content: 'lorem ipsum',
+    }
+  }
+
+  handleAddRandom = (listId) => {
     console.log('handle add random called')
+    let cloneStore = JSON.parse(JSON.stringify(this.state.store))
+    let newCard = this.newRandomCard()
+    cloneStore.lists.forEach((list) => {
+      if (list.id == listId) {
+        list.cardIds.push(newCard.id)
+      }
+    })
+    cloneStore.allCards[newCard.id] = newCard
+    this.setState({ store: cloneStore })
   }
 
   render () {
